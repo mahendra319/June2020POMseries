@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="HubSpot test suite" verbose="1">
+	<listeners>
+		<!-- <listener class-name="com.qa.hubspot.listeners.ExtentReportListener" />
+		<listener class-name="com.qa.hubspot.listeners.ScreenshotListener" /> -->
+		<!-- <listener class-name="com.qa.hubspot.listeners.pdfListener" /> -->
+		<listener class-name="com.qa.hubspot.listeners.TestAllureListener" />
+		<listener class-name="com.qa.hubspot.listeners.TesultsListener" />
+	</listeners>
+	
+	<test name="LoginPageTest">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.qa.hubspot.tests.LoginPageTest" />
+		</classes>
+	</test>
+	
+	<!-- <test name="HomePageTest">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.qa.hubspot.tests.HomePageTest" />
+		</classes>
+	</test>
+	
+	<test name="ContactsPageTest">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.qa.hubspot.tests.ContactsPageTest" />
+		</classes>
+	</test>
+	
+	<test name="SalesPageTest">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.qa.hubspot.tests.SalesPageTest" />
+		</classes>
+	</test> -->
+	
+</suite>

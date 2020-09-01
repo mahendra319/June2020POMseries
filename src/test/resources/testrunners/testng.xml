@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="HubSpot test suite" thread-count="3" parallel ="tests" verbose="1">
+
+	<test name="ContactsPageTest">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.qa.hubspot.tests.ContactsPageTest" />
+		</classes>
+	</test>
+	
+	<!-- <test name="SalesPageTest">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="com.qa.hubspot.tests.SalesPageTest" />
+		</classes>
+	</test> -->
+	
+</suite>
