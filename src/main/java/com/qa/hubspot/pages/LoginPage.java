@@ -48,7 +48,7 @@ public class LoginPage extends BasePage{
 //		driver.findElement(email).sendKeys(un);
 //		driver.findElement(password).sendKeys(pwd);
 //		driver.findElement(loginButton).click();
-		System.out.println("login to applicatio");
+		System.out.println("login to application");
 		elementUtil.doSendKeys(email, un);
 		elementUtil.doSendKeys(password, pwd);
 		elementUtil.doClick(loginButton);
