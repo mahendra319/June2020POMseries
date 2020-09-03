@@ -4,7 +4,7 @@ public class CompaniesPage {
 	
 	
 	public CompaniesPage() {
-		System.out.println("Companies Page ");
+		System.out.println("Companies Page to be design ");
 	}
 
 }
