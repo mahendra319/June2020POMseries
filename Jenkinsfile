@@ -51,19 +51,19 @@ pipeline {
 
         stage('firefox') {
           steps {
-            sh 'mvn test -Denv=qa -Dbrowser=firefox'
+            sh 'mvn test -Denv=stage -Dbrowser=firefox'
           }
         }
 
         stage('chrome') {
           steps {
-            sh 'mvn test -Denv=qa -Dbrowser=chrome'
+            sh 'mvn test -Denv=stage -Dbrowser=chrome'
           }
         }
 
         stage('safari') {
           steps {
-            sh 'mvn test -Denv=qa -Dbrowser=firefox'
+            sh 'mvn test -Denv=stage -Dbrowser=firefox'
           }
         }
 
