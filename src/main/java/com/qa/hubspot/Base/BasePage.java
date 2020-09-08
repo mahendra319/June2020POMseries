@@ -114,7 +114,7 @@ public class BasePage {
 					path="./src/main/java/com/qa/hubspot/config/config.dev.properties";
 					break;
 				case "stage":
-					path = "./src/main/java/com/qa/hubspot/config/config.properties";
+					path = "./src/main/java/com/qa/hubspot/config/config.stage.properties";
 					break;
 				default:
 					System.out.println("Please pass the correct env value....");
