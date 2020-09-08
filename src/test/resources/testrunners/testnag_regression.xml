@@ -11,7 +11,7 @@
 	</listeners>
 	
 	<test name="LoginPageTest">
-		<!-- <parameter name="browser" value="firefox" /> -->
+		<parameter name="browser" value="firefox" />
 		<classes>
 			<class name="com.qa.hubspot.tests.LoginPageTest" />
 		</classes>

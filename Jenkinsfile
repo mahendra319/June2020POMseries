@@ -63,7 +63,7 @@ pipeline {
 
         stage('safari') {
           steps {
-            sh 'mvn test -Denv=qa -Dbrowser=safari'
+            sh 'mvn test -Denv=qa -Dbrowser=firefox'
           }
         }
 
