@@ -5,13 +5,13 @@ pipeline {
       parallel {
         stage('Build Dev') {
           steps {
-            bat 'mvn clean install -DskipTests=true'
+            sh 'mvn clean install -DskipTests=true'
           }
         }
 
         stage('chrome') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=chrome'
+            sh 'mvn test -Denv=qa -Dbrowser=chrome'
           }
         }
 
@@ -22,13 +22,13 @@ pipeline {
       parallel {
         stage('Build QA') {
           steps {
-            bat 'mvn clean install -DskipTests=true'
+            sh 'mvn clean install -DskipTests=true'
           }
         }
 
         stage('chrome') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=chrome'
+            sh 'mvn test -Denv=qa -Dbrowser=chrome'
           }
         }
 
@@ -45,25 +45,25 @@ pipeline {
       parallel {
         stage('Build Stage') {
           steps {
-            bat 'mvn clean install -DskipTests=true'
+            sh 'mvn clean install -DskipTests=true'
           }
         }
 
         stage('firefox') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=firefox'
+            sh 'mvn test -Denv=qa -Dbrowser=firefox'
           }
         }
 
         stage('chrome') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=chrome'
+            sh 'mvn test -Denv=qa -Dbrowser=chrome'
           }
         }
 
         stage('safari') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=safari'
+            sh 'mvn test -Denv=qa -Dbrowser=safari'
           }
         }
 
