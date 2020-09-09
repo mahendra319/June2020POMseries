@@ -60,13 +60,6 @@ pipeline {
             bat 'mvn test -Denv=stage -Dbrowser=chrome'
           }
         }
-
-       /* stage('safari') {
-          steps {
-            bat 'mvn test -Denv=stage -Dbrowser=safari'
-          }
-        } */
-
       }
     }
 
