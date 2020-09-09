@@ -40,8 +40,16 @@ public class BasePage {
 	 */
 	public WebDriver init_driver(Properties prop) {
 		
+		
 		flashElement = prop.getProperty("highlight");
-		String browserName = prop.getProperty("browser").trim();
+		
+		String browserName = null;
+		if(System.getProperty("browser")==null) {
+			browserName = prop.getProperty("browser").trim();
+		}else {
+			browserName = System.getProperty("browser");
+		}
+				
 		System.out.println("Browser Name is: "+browserName);
 		optionsManager = new OptionsManager(prop);
 		
