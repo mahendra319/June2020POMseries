@@ -11,7 +11,7 @@ pipeline {
 
         stage('chrome') {
           steps {
-            bat 'mvn test -Denv=qa -Dbrowser=chrome'
+            bat 'mvn test -Denv=dev -Dbrowser=chrome'
           }
         }
 
@@ -61,7 +61,7 @@ pipeline {
           }
         }
 
-        stage('safari') {
+        stage('firefox') {
           steps {
             bat 'mvn test -Denv=stage -Dbrowser=firefox'
           }
