@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +14,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import com.qa.hubspot.utils.OptionsManager;
@@ -43,31 +49,45 @@ public class BasePage {
 		
 		flashElement = prop.getProperty("highlight");
 		
-		String browserName = null;
-		if(System.getProperty("browser")==null) {
-			browserName = prop.getProperty("browser").trim();
-		}else {
-			browserName = System.getProperty("browser");
-		}
-				
+/*
+ * if we want to pass browser parameter (-Dbrowser="chrome" )from jenkinsfile then we need below 5 lines of code
+ */
+//		String browserName = null;
+//		if(System.getProperty("browser")==null) {
+//			browserName = prop.getProperty("browser").trim();
+//		}else {
+//			browserName = System.getProperty("browser");
+//		}
+		
+		String browserName = prop.getProperty("browser").trim();
 		System.out.println("Browser Name is: "+browserName);
 		optionsManager = new OptionsManager(prop);
 		
 		if(browserName.equalsIgnoreCase("chrome")) {
 			
 			WebDriverManager.chromedriver().setup();
-			//driver = new ChromeDriver(optionsManager.getChromeOpotions());
-			tlDriver.set(new ChromeDriver(optionsManager.getChromeOpotions()));
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteWebDriver(browserName);
+			}
+			else {
+				tlDriver.set(new ChromeDriver(optionsManager.getChromeOpotions()));
+			}
+			
+						
 		}
 		else if(browserName.equalsIgnoreCase("firefox")) {
 			
 			WebDriverManager.firefoxdriver().setup();
-			//driver = new FirefoxDriver(optionsManager.getFirefoxOpotions());
-			tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOpotions()));
+			if(Boolean.parseBoolean(prop.getProperty("remote"))) {
+				init_remoteWebDriver(browserName);
+			}
+			else {
+				tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOpotions()));
+			}
+					
 		}
+		//for safari we don't have docker container
 		else if(browserName.equalsIgnoreCase("safari")) {
-			
-			//driver = new SafariDriver();
 			tlDriver.set(new SafariDriver());
 		}
 		
@@ -83,6 +103,39 @@ public class BasePage {
 		return getDriver();
 		
 	}
+	
+	/**
+	 * This method will define the desired capabilities and will initialize the driver with capablity
+	 * Also this method will initialize the driver with selenium Hub/port
+	 */
+	
+	private void init_remoteWebDriver(String browserName) {
+		if(browserName.equalsIgnoreCase("chrome")) {
+			DesiredCapabilities cap = DesiredCapabilities.chrome();
+			cap.setCapability(ChromeOptions.CAPABILITY, optionsManager.getChromeOpotions());
+			
+			try {
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("hubURL")), cap));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+		else if(browserName.equalsIgnoreCase("firefox")) {
+			DesiredCapabilities cap = DesiredCapabilities.firefox();
+			cap.setCapability(FirefoxOptions.FIREFOX_OPTIONS, optionsManager.getFirefoxOpotions());
+			
+			try {
+				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("hubURL")), cap));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * getDriver using ThreadLocal
