@@ -240,7 +240,7 @@ public class pdfListener implements ITestListener {
 			}
 			
 			StackTraceElement[] elems = throwable.getStackTrace();
-			String exception = "";
+			//String exception = "";
 			for(StackTraceElement ste : elems) {
 				Paragraph throwParagraph = new Paragraph(ste.toString());
 				try {
